@@ -1,1 +1,1 @@
-# world-simulator
+# World Simulator
