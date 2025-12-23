@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HTTP } from "../contracts/HTTP";
+import { HTTP, ConfigHttp } from "../contracts/HTTP";
 
 export class Axios implements HTTP {
     private baseUrl: string;
@@ -8,22 +8,59 @@ export class Axios implements HTTP {
         this.baseUrl = baseUrl;
     }
     
-    async get(path: string, options: { headers: { [key in string]: string; }; }): Promise<{ data: any; }> {
-        const { data } = await axios.get(`${this.baseUrl}${path}`, {
-            headers: options.headers
-        });
+    async get(path: string, options?: ConfigHttp ): Promise<{ data: any; }> {
+        let OptionsConfig: { [key in string]: any } = {};
+
+        if(options?.headers){
+            OptionsConfig["headers"] = options.headers;
+        }
+
+        const { data } = await axios.get(`${this.baseUrl}${path}`, OptionsConfig);
+
         return { data };
     }
-    async post<TBody>(path: string, body: TBody, options: { headers: { [key in string]: string; }; }): Promise<{ data: any; }> {
-        throw new Error("Method not implemented.");
+    async post<TBody>(path: string, body: TBody, options?: ConfigHttp ): Promise<{ data: any; }> {
+        let OptionsConfig: { [key in string]: any } = {};
+
+        if(options?.headers){
+            OptionsConfig["headers"] = options.headers;
+        }
+        
+        const { data } = await axios.post(`${this.baseUrl}${path}`, body, OptionsConfig);
+
+        return { data };
     }
-    async put<TBody>(path: string, body: TBody, options: { headers: { [key in string]: string; }; }): Promise<{ data: any; }> {
-        throw new Error("Method not implemented.");
+    async put<TBody>(path: string, body: TBody, options?: ConfigHttp ): Promise<{ data: any; }> {
+        let OptionsConfig: { [key in string]: any } = {};
+
+        if(options?.headers){
+            OptionsConfig["headers"] = options.headers;
+        }
+        
+        const { data } = await axios.put(`${this.baseUrl}${path}`, body, OptionsConfig);
+
+        return { data };
     }
-    async patch<TBody>(path: string, body: TBody, options: { headers: { [key in string]: string; }; }): Promise<{ data: any; }> {
-        throw new Error("Method not implemented.");
+    async patch<TBody>(path: string, body: TBody, options?: ConfigHttp ): Promise<{ data: any; }> {
+        let OptionsConfig: { [key in string]: any } = {};
+
+        if(options?.headers){
+            OptionsConfig["headers"] = options.headers;
+        }
+        
+        const { data } = await axios.patch(`${this.baseUrl}${path}`, body, OptionsConfig);
+
+        return { data };
     }
-    async delete<TBody>(path: string, body: TBody, options: { headers: { [key in string]: string; }; }): Promise<{ data: any; }> {
-        throw new Error("Method not implemented.");
+    async delete<TBody>(path: string, options?: ConfigHttp ): Promise<{ data: any; }> {
+        let OptionsConfig: { [key in string]: any } = {};
+
+        if(options?.headers){
+            OptionsConfig["headers"] = options.headers;
+        }
+        
+        const { data } = await axios.delete(`${this.baseUrl}${path}`, OptionsConfig);
+
+        return { data };
     }
 }
