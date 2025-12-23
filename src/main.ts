@@ -1,7 +1,11 @@
-class Temperature {
-    private celsius: number;
+import { HTTP } from "./utils/contracts/HTTP";
 
-    constructor(celsius: number) {
-        this.celsius = celsius;
+export class Temperature {
+    constructor(
+        private readonly http: HTTP
+    ) {}
+
+    public default(){
+
     }
 }
